@@ -14,12 +14,22 @@ def lambda_handler(event, context):
         
         return {
             'statusCode': 200,
+            'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
+                },
             'body': json.dumps(open_ai_response)
         }
     except Exception as e:
         return {
             'statusCode': 500,
-            'body': str(e)
+            'body': str(e),
+            'headers': {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
+                },
         }
     
 # event = {
