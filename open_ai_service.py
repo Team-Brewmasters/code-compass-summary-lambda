@@ -114,13 +114,7 @@ Please provide the analysis in a structured JSON format as outlined in the syste
      }
    ]
  },
- "contributors": [
-   {
-     "username": "string",
-     "commits": "integer",
-     "lines_contributed": "integer"
-   }
- ]
+ "suggestedQuestions": ["string","string"] (Give three potential questions a user might ask about the repository.),
 }'''},
                   {"role": "user", "content": str(prompt)}],
     )
