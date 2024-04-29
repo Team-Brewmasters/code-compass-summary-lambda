@@ -38,11 +38,11 @@ def get_repo_file_contents(repo_url):
         print(f"Error: {response.status_code} - {response.text}")
         return []
 
-# Example usage
-repo_link = "https://github.com/Team-Brewmasters/code-compass-summary-lambda"
-file_contents_array = get_repo_file_contents(repo_link)
+# # Example usage
+# repo_link = "https://github.com/Team-Brewmasters/code-compass-summary-lambda"
+# file_contents_array = get_repo_file_contents(repo_link)
 
-# Print the file contents array
-for file_content in file_contents_array:
-    print(file_content)
-    print("---")
+# # Print the file contents array
+# for file_content in file_contents_array:
+#     print(file_content)
+#     print("---")
