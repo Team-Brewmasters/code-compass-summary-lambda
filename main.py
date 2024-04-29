@@ -19,7 +19,7 @@ def lambda_handler(event, context):
                     'Access-Control-Allow-Methods': '*',
                     'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
                 },
-            'body': open_ai_response
+            'body': json.dumps(open_ai_response)
         }
     except Exception as e:
         return {
