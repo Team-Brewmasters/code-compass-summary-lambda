@@ -10,9 +10,9 @@ def call_chatgpt(prompt):
     # Call the OpenAI ChatGPT API
     response = client.chat.completions.create(
         model="gpt-4-turbo",
-        messages=[{"role": "system", "content": '''You are a master engineer, analyze the provided software repository data and generate a comprehensive report covering the following aspects:
+        messages=[{"role": "system", "content": '''You are a master engineer, analyze the provided software repository data and generate a summary report covering the following aspects in JSON.
 '''}, 
-                  {"role": "system", "content": '''{
+                  {"role": "system", "content": '''Respond like so: {
  "repository": {
    "name": "string",
    "description": "string",
