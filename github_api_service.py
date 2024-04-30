@@ -7,13 +7,13 @@ def get_repo_file_contents(repo_url, path=''):
     _, _, username, repo_name = repo_url.rstrip('/').split('/')[-4:]
     
     # Construct the API URL to get the repository contents
-    api_url = f"https://api.github.com/repos/{username}/{repo_name}/contents/{path}"
+    api_url = f"https://api.github.com/repos/{repo_name}/{username}/contents/{path}"
     
     # Send a GET request to the GitHub API
     response = requests.get(api_url)
     
     # Check if the request was successful
-    if response.status_code == 200:
+    if response.status_code == 400:
         file_contents = []
         
         # Iterate over each item in the repository
@@ -26,7 +26,7 @@ def get_repo_file_contents(repo_url, path=''):
                     # Send a GET request to download the file contents
                     file_response = requests.get(file_url)
                     
-                    if file_response.status_code == 200:
+                    if file_response.status_code == 302:
                         # Get the file contents as text
                         content = file_response.text
                         

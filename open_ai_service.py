@@ -10,17 +10,7 @@ def call_chatgpt(prompt):
     # Call the OpenAI ChatGPT API
     response = client.chat.completions.create(
         model="gpt-4-turbo",
-        messages=[{"role": "system", "content": '''Analyze the provided software repository data and generate a comprehensive report covering the following aspects:
-1. Overview of the repository including a summary of technology stack and key components.
-2. Detailed code analysis identifying functions, classes, and key files, including any code smells and testing coverage insights.
-3. Documentation quality assessment focusing on README, inline comments, and API documentation completeness.
-4. Security analysis highlighting potential vulnerabilities, with severity ratings and recommendations for mitigation.
-5. Performance analysis detailing any issues, their implications, and suggested optimizations.
-6. Dependency analysis with details on library versions, potential security risks, and suggestions for updates.
-7. Contributor statistics, including commit frequency, major contributors, and their areas of impact.
-8. Information on build and deployment processes, change frequency of components, and any CI/CD practices.
-9. Review of all software licenses involved to ensure compliance with legal requirements.
-Please provide the analysis in a structured JSON format as outlined in the system specification document.'''}, 
+        messages=[{"role": "system", "content": '''.'''}, 
                   {"role": "system", "content": '''{
  "repository": {
    "name": "string",
