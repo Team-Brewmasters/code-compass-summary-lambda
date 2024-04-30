@@ -33,15 +33,15 @@ class DynamoCacheService:
             print(e)
             return None
 
-def put_summary_data(self, repo, name, description, languages, frameworks, databases, tools, suggested_questions):
-        item = {
-            'repo': repo,
-            'name': name,
-            'description': description,
-            'languages': languages,
-            'frameworks': frameworks,
-            'databases': databases,
-            'tools': tools,
-            'suggestedQuestions': suggested_questions   
-        }
-        self.table.put_item(Item=item)
+    def put_summary_data(self, repo, name, description, languages, frameworks, databases, tools, suggested_questions):
+            item = {
+                'repo': repo,
+                'name': name,
+                'description': description,
+                'languages': languages,
+                'frameworks': frameworks,
+                'databases': databases,
+                'tools': tools,
+                'suggestedQuestions': suggested_questions   
+            }
+            self.table.put_item(Item=item)
