@@ -41,6 +41,7 @@ def lambda_handler(event, context):
             'body': json.dumps(open_ai_response)
         }
     except Exception as e:
+        print(e)
         return {
             'statusCode': 500,
             'body': str(e),
