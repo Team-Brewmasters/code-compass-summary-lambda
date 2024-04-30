@@ -11,26 +11,31 @@ def call_chatgpt(prompt):
     response = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[{"role": "system", "content": '''You are a master engineer, analyze the provided software repository data and generate a summary report covering the following aspects in JSON.
-'''}, 
-                  {"role": "system", "content": '''Respond like so: {
- "repository": {
-   "name": "string",
-   "description": "string",
-   "technology_stack": {
-     "languages": ["string"],
-     "frameworks": ["string"],
-     "databases": ["string"],
-     "tools": ["string"]
-   },
- },
- "suggestedQuestions": ["string","string"] (Give three potential questions a user might ask about the repository.),
-}'''},
-                  {"role": "user", "content": str(prompt)}],
-    )
+          '''}, 
+                            {"role": "system", "content": '''Respond like so: {
+          "repository": {
+            "name": "string",
+            "description": "string",
+            "technology_stack": {
+              "languages": ["string"],
+              "frameworks": ["string"],
+              "databases": ["string"],
+              "tools": ["string"]
+            },
+          },
+          "suggestedQuestions": ["string","string"] (Give three potential questions a user might ask about the repository.),
+          }'''},
+                            {"role": "user", "content": str(prompt)}],
+              )
+
+
 
  
     # Extract the generated response from the API response
     generated_response = response.choices[0].message.content
+
+    generated_response = generated_response.replace("```json", " ")
+    generated_response = generated_response.replace("```", " ")
 
     return generated_response
 
