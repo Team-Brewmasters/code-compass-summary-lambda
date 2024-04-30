@@ -27,7 +27,7 @@ def lambda_handler(event, context):
                     'Access-Control-Allow-Methods': '*',
                     'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
                 },
-                'body': json.dumps(summary_data)
+                'body': summary_data
             }
         
         print("Summary data not found in cache. Fetching from GitHub and OpenAI...")
