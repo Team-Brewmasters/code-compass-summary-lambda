@@ -82,7 +82,7 @@ def lambda_handler(event, context):
 
 def store_repository_search(repository_url):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('RecentlyViewedRepos')
+    table = dynamodb.Table('recent_repos')
     current_timestamp = int(time.time() * 1000)  # Millisecond precision
     
     table.put_item(
