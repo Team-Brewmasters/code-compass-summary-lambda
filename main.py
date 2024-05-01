@@ -11,8 +11,11 @@ from open_ai_service import call_chatgpt
 def lambda_handler(event, context):
     try:
         github_url = event['queryStringParameters']['githubURL']
-
-        store_repository_search(github_url)
+        
+        try: 
+            store_repository_search(github_url)
+        except Exception as e:
+            print(f"Error storing repository search: {e}")
 
         _, _, username, repo_name = github_url.rstrip('/').split('/')[-4:]
         print(f"Username: {username}, Repo Name: {repo_name}")
