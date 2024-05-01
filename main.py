@@ -1,13 +1,18 @@
 import json
+import time
 
+import boto3
+
+from dynamo_cache_service import DynamoCacheService
 from github_api_service import get_repo_file_contents
 from open_ai_service import call_chatgpt
-from dynamo_cache_service import DynamoCacheService
 
 
 def lambda_handler(event, context):
     try:
         github_url = event['queryStringParameters']['githubURL']
+
+        store_repository_search(github_url)
 
         _, _, username, repo_name = github_url.rstrip('/').split('/')[-4:]
         print(f"Username: {username}, Repo Name: {repo_name}")
@@ -74,3 +79,15 @@ def lambda_handler(event, context):
 # }
 
 # lambda_handler(event, None)
+
+def store_repository_search(repository_url):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('RecentlyViewedRepos')
+    current_timestamp = int(time.time() * 1000)  # Millisecond precision
+    
+    table.put_item(
+        Item={
+            'searchTimestamp': current_timestamp,
+            'repositoryURL': repository_url
+        }
+    )
