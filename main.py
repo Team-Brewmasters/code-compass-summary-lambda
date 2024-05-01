@@ -11,9 +11,9 @@ from open_ai_service import call_chatgpt
 def lambda_handler(event, context):
     try:
         github_url = event['queryStringParameters']['githubURL']
-        
+
         try: 
-            store_repository_search(github_url)
+            update_or_create_search(github_url)
         except Exception as e:
             print(f"Error storing repository search: {e}")
 
@@ -83,14 +83,27 @@ def lambda_handler(event, context):
 
 # lambda_handler(event, None)
 
-def store_repository_search(repository_url):
+def update_or_create_search(repository_url):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('recent_repos')
-    current_timestamp = int(time.time() * 1000)  # Millisecond precision
-    
-    table.put_item(
-        Item={
-            'searchTimestamp': current_timestamp,
-            'repositoryURL': repository_url
-        }
+
+    current_timestamp = int(time.time())
+    existing_item = table.get_item(
+        Key={'repositoryURL': repository_url}
     )
+
+    if 'Item' in existing_item:
+        # Update the existing item's timestamp
+        table.update_item(
+            Key={'repositoryURL': repository_url},
+            UpdateExpression='SET searchTimestamp = :val',
+            ExpressionAttributeValues={':val': current_timestamp}
+        )
+    else:
+        # Create a new item if it doesn't exist
+        table.put_item(
+            Item={
+                'repositoryURL': repository_url,
+                'searchTimestamp': current_timestamp
+            }
+        )
