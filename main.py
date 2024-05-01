@@ -37,7 +37,7 @@ def lambda_handler(event, context):
         open_ai_response = call_chatgpt(file_content)
 
         parsed_response = json.loads(open_ai_response)
-        repo_name = parsed_response['repository']['name']
+        repo_name = repo_name
         description = parsed_response['repository']['description']
         languages = parsed_response['repository']['technology_stack']['languages']
         frameworks = parsed_response['repository']['technology_stack']['frameworks']
